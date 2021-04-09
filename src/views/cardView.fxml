@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.CardViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CardViewController">
+   <children>
+      <HBox>
+         <children>
+            <VBox>
+               <children>
+                  <HBox spacing="50.0">
+                     <children>
+                        <Label fx:id="cardNameLabel" text="Card Name" />
+                        <Label fx:id="manaCostLabel" text="Mana Cost" />
+                     </children>
+                  </HBox>
+                  <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="typeLineLabel" text="Type Line" />
+                  <TextArea fx:id="textBoxField" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="384.0" prefWidth="222.0">
+               <children>
+                  <Label text="Create a Card!" />
+                  <HBox>
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#createNewRegularCard" text="Regular" />
+                        <Button mnemonicParsing="false" onAction="#createNewCreatureCard" text="Creature" />
+                        <Button mnemonicParsing="false" onAction="#createNewPlaneswalkerCard" text="Planeswalker" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>
