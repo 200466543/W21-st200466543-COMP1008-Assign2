@@ -6,6 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import models.Card;
+
+import java.util.ArrayList;
 
 public class Main extends Application{
     public static void main(String[] args) {
@@ -20,5 +23,7 @@ public class Main extends Application{
         stage.setTitle("MTG Card Creator");
         stage.show();
     }
+
+
 
 }

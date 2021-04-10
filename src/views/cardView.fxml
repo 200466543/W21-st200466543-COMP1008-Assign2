@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CardViewController">
    <children>
@@ -22,7 +23,7 @@
                   </HBox>
                   <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="typeLineLabel" text="Type Line" />
-                  <TextArea fx:id="textBoxField" prefHeight="200.0" prefWidth="200.0" />
+                  <TextArea fx:id="textBoxField" editable="false" prefHeight="200.0" prefWidth="200.0" />
                </children>
             </VBox>
             <VBox prefHeight="384.0" prefWidth="222.0">
@@ -35,6 +36,12 @@
                         <Button mnemonicParsing="false" onAction="#createNewPlaneswalkerCard" text="Planeswalker" />
                      </children>
                   </HBox>
+                  <TextArea fx:id="welcomeTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
+                  <Button mnemonicParsing="false" onAction="#viewCreatedCards" text="View Cards" />
                </children>
             </VBox>
          </children>

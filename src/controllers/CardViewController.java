@@ -31,6 +31,9 @@ public class CardViewController implements Initializable {
     @FXML
     private TextArea textBoxField;
 
+    @FXML
+    private TextArea welcomeTextArea;
+
     private Card startCard = new Card("Negate", 2, "Instant",
             "Counter target noncreature spell.", new Image("images/negate.jpg"));
 
@@ -41,6 +44,7 @@ public class CardViewController implements Initializable {
         imageView.setImage(startCard.getCardImage());
         typeLineLabel.setText(startCard.getTypeLine());
         textBoxField.setText(startCard.getTextBox());
+        welcomeTextArea.setText("Welcome to the Start Screen for the MTG Card Creator. To the left is an example of a card. Please press one of the buttons to get started.");
     }
 
     @FXML
@@ -56,6 +60,11 @@ public class CardViewController implements Initializable {
     @FXML
     void createNewRegularCard(ActionEvent event) throws IOException {
         SceneChanger.changeScenes(event,"../views/createRegularCardView.fxml","MTG Card Creator - Create a Regular Card");
+    }
+
+    @FXML
+    void viewCreatedCards(ActionEvent event) throws IOException {
+        SceneChanger.changeScenes(event,"../views/createdCardsView.fxml","MTG Card Creator - Created Cards");
     }
 }
 
