@@ -3,16 +3,22 @@ package controllers;
 import Utilities.SceneChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import models.Card;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreateRegularCardViewController {
+
+    FileChooser fc = new FileChooser();
 
     @FXML
     private TextField cardNameTextField;
@@ -32,16 +38,23 @@ public class CreateRegularCardViewController {
     @FXML
     private Label msgLabel;
 
-    //list to store created cards
-    ArrayList<Card> regularCardsArrayList = new ArrayList<Card>();
+    @FXML
+    private Button uploadButton;
 
+
+
+    /**
+     * If the fields are populated, then makes a card object
+     * and adds it to the Arraylist
+     * @param event
+     */
     @FXML
     void createRegularCard(ActionEvent event) {
         if (fieldsArePopulated()) {
             try {
                 Card newRegularCard = new Card(cardNameTextField.getText(), Integer.parseInt(manaCostTextField.getText()),
                         typeLineTextField.getText(), textBoxField.getText(), imageView.getImage());
-                regularCardsArrayList.add(newRegularCard);
+                CreatedCardsViewController.cardsArrayList.add(newRegularCard);
             }catch(IllegalArgumentException e){
                 msgLabel.setText(e.getMessage());
             }
@@ -49,11 +62,21 @@ public class CreateRegularCardViewController {
         }
     }
 
+    /**
+     * Returns user to start menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void startMenuButton(ActionEvent event) throws IOException {
         SceneChanger.changeScenes(event,"../views/cardView.fxml","MTG Card Creator");
     }
 
+    /**
+     * Checks to see if all fields are populated, except image
+     * as some cards don't have an image
+     * @return
+     */
     private boolean fieldsArePopulated()
     {
         String errMsg = "The following fields are empty: ";
@@ -75,5 +98,19 @@ public class CreateRegularCardViewController {
         //there was at least 1 empty field
         msgLabel.setText(errMsg.substring(0, errMsg.length()-2));
         return false;
+    }
+
+    /**
+     * Allows user to upload an image, see it
+     * and is saved as part of the Card object
+     * @param event
+     */
+    @FXML
+    void uploadImageButton(ActionEvent event) {
+        fc = new FileChooser();
+        File tmp = fc.showOpenDialog(uploadButton.getScene().getWindow());
+        System.out.println(tmp.toURI().toString());
+        Image img = new Image(tmp.toURI().toString());
+        imageView.setImage(img);
     }
 }
