@@ -1,13 +1,17 @@
 import Utilities.SceneChanger;
+import controllers.CreatedCardsViewController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.Card;
+import models.Creature;
+import models.Planeswalker;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -105,6 +105,11 @@ public class CreatePlaneswalkerCardViewController {
         return false;
     }
 
+    /**
+     * Allows user to upload an image, see it
+     * and is saved as part of the Card object
+     * @param event
+     */
     @FXML
     void uploadImageButton(ActionEvent event) {
         fc = new FileChooser();

@@ -7,6 +7,7 @@ package controllers;
         import javafx.scene.control.Label;
         import javafx.scene.control.TextArea;
         import javafx.scene.control.TextField;
+        import javafx.scene.image.Image;
         import javafx.scene.image.ImageView;
         import models.Card;
         import models.Creature;
@@ -52,6 +53,10 @@ public class CreatedCardsViewController implements Initializable {
     @FXML
     private TextField toughnessTextField;
 
+    /**
+     * Selects the targeted card
+     * @param event
+     */
     @FXML
     void selectCardButton(ActionEvent event) {
         String targetCard = cardNameTextField.getText();
@@ -86,10 +91,16 @@ public class CreatedCardsViewController implements Initializable {
                 typeLineLabel.setText(planeswalker.getTypeLine());
                 textBoxField.setText(planeswalker.getTextBox());
                 powerTextField.setText(Integer.toString(planeswalker.getLoyalty()));
+                toughnessTextField.setText("");
             }
         }
     }
 
+    /**
+     * Returns user to start menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void startMenuButton(ActionEvent event) throws IOException {
         SceneChanger.changeScenes(event,"../views/cardView.fxml","MTG Card Creator");
@@ -97,6 +108,22 @@ public class CreatedCardsViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+            Card newCard = new Card("Counterspell", 2, "Instant",
+                    "Counter target spell.", new Image("images/counterspell.jpg"));
+            cardsArrayList.add(newCard);
+            Creature newCreature = new Creature("Frilled Mystic", 4, "Creature",
+                    "Flash When Frilled Mystic enters the battlefield, you may counter target spell.",
+                    new Image("images/frilledmystic.jpg"), 3, 2);
+            creaturesArrayList.add(newCreature);
+            Planeswalker newPlaneswalker = new Planeswalker("Davriel, Rogue Shadowmage", 3, "Legendary Planeswalker",
+                    "At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, Davriel, Rogue Shadowmage deals 2 damage to them. -1 Target Player discards a card",
+                    new Image("images/davriel.jpg"), 3);
+            planeswalkersArrayList.add(newPlaneswalker);
+
+
+
         List<Card> madeCards = cardsArrayList;
         String text = "";
         for (Card card: madeCards) {

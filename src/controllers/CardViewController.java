@@ -47,21 +47,41 @@ public class CardViewController implements Initializable {
         welcomeTextArea.setText("Welcome to the Start Screen for the MTG Card Creator. To the left is an example of a card. Please press one of the buttons to get started.");
     }
 
+    /**
+     * Navigates to the Creature creation page
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void createNewCreatureCard(ActionEvent event) throws IOException {
         SceneChanger.changeScenes(event,"../views/createCreatureCardView.fxml","MTG Card Creator - Create a Creature Card");
     }
 
+    /**
+     * Navigates to the Planeswalker creation page
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void createNewPlaneswalkerCard(ActionEvent event) throws IOException {
         SceneChanger.changeScenes(event,"../views/createPlaneswalkerCardView.fxml","MTG Card Creator - Create a Planeswalker Card");
     }
 
+    /**
+     * Navigates to the Regular creation page
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void createNewRegularCard(ActionEvent event) throws IOException {
         SceneChanger.changeScenes(event,"../views/createRegularCardView.fxml","MTG Card Creator - Create a Regular Card");
     }
 
+    /**
+     * Navigates to the created cards page
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void viewCreatedCards(ActionEvent event) throws IOException {
         SceneChanger.changeScenes(event,"../views/createdCardsView.fxml","MTG Card Creator - Created Cards");
