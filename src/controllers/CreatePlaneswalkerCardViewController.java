@@ -3,14 +3,22 @@ package controllers;
 import Utilities.SceneChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import models.Creature;
+import models.Planeswalker;
 
+import java.io.File;
 import java.io.IOException;
 
 public class CreatePlaneswalkerCardViewController {
+
+    FileChooser fc = new FileChooser();
 
     @FXML
     private TextField cardNameTextField;
@@ -28,12 +36,81 @@ public class CreatePlaneswalkerCardViewController {
     private TextArea textBoxField;
 
     @FXML
-    void createPlaneswalkerCard(ActionEvent event) {
+    private TextField loyaltyTextField;
 
+    @FXML
+    private Label msgLabel;
+
+    @FXML
+    private Button uploadButton;
+
+    /**
+     * If the fields are populated, then makes a planeswalker object
+     * and adds it to the Arraylist
+     * @param event
+     */
+    @FXML
+    void createPlaneswalkerCard(ActionEvent event) {
+        if (fieldsArePopulated()) {
+            try {
+                Planeswalker newPlaneswalkerCard = new Planeswalker(cardNameTextField.getText(), Integer.parseInt(manaCostTextField.getText()),
+                        typeLineTextField.getText(), textBoxField.getText(), imageView.getImage(),
+                        Integer.parseInt(loyaltyTextField.getText()));
+                CreatedCardsViewController.planeswalkersArrayList.add(newPlaneswalkerCard);
+            }catch(IllegalArgumentException e){
+                msgLabel.setText(e.getMessage());
+            }
+
+        }
     }
 
+    /**
+     * Returns user to start menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void startMenuButton(ActionEvent event) throws IOException {
         SceneChanger.changeScenes(event,"../views/cardView.fxml","MTG Card Creator");
+    }
+
+    /**
+     * Checks to see if all fields are populated, except image
+     * as some cards don't have an image
+     * @return
+     */
+    private boolean fieldsArePopulated()
+    {
+        String errMsg = "The following fields are empty: ";
+        if (cardNameTextField.getText().isEmpty())
+            errMsg += "card name, ";
+
+        if (manaCostTextField.getText().isEmpty())
+            errMsg += "mana cost, ";
+
+        if (typeLineTextField.getText().isEmpty())
+            errMsg += "type line, ";
+
+        if (textBoxField.getText().isEmpty())
+            errMsg += "text box, ";
+
+        if (loyaltyTextField.getText().isEmpty())
+            errMsg += "loyalty, ";
+
+        if (errMsg.equals("The following fields are empty: "))
+            return true;
+
+        //there was at least 1 empty field
+        msgLabel.setText(errMsg.substring(0, errMsg.length()-2));
+        return false;
+    }
+
+    @FXML
+    void uploadImageButton(ActionEvent event) {
+        fc = new FileChooser();
+        File tmp = fc.showOpenDialog(uploadButton.getScene().getWindow());
+        System.out.println(tmp.toURI().toString());
+        Image img = new Image(tmp.toURI().toString());
+        imageView.setImage(img);
     }
 }

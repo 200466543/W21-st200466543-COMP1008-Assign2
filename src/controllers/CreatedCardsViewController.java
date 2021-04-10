@@ -9,6 +9,8 @@ package controllers;
         import javafx.scene.control.TextField;
         import javafx.scene.image.ImageView;
         import models.Card;
+        import models.Creature;
+        import models.Planeswalker;
 
         import java.io.IOException;
         import java.net.URL;
@@ -20,6 +22,8 @@ public class CreatedCardsViewController implements Initializable {
 
     //list to store created card
     public static ArrayList<Card> cardsArrayList = new ArrayList<Card>();
+    public static ArrayList<Creature> creaturesArrayList = new ArrayList<Creature>();
+    public static ArrayList<Planeswalker> planeswalkersArrayList = new ArrayList<Planeswalker>();
 
     @FXML
     private TextArea listOfCards;
@@ -43,6 +47,12 @@ public class CreatedCardsViewController implements Initializable {
     private TextArea textBoxField;
 
     @FXML
+    private TextField powerTextField;
+
+    @FXML
+    private TextField toughnessTextField;
+
+    @FXML
     void selectCardButton(ActionEvent event) {
         String targetCard = cardNameTextField.getText();
         List<Card> madeCards = cardsArrayList;
@@ -53,6 +63,29 @@ public class CreatedCardsViewController implements Initializable {
                 imageView.setImage(card.getCardImage());
                 typeLineLabel.setText(card.getTypeLine());
                 textBoxField.setText(card.getTextBox());
+            }
+        }
+        List<Creature> madeCreatures = creaturesArrayList;
+        for (Creature creature: madeCreatures) {
+            if (creature.getName().equals(targetCard)){
+                cardNameLabel.setText(creature.getName());
+                manaCostLabel.setText(Integer.toString(creature.getManaCost()));
+                imageView.setImage(creature.getCardImage());
+                typeLineLabel.setText(creature.getTypeLine());
+                textBoxField.setText(creature.getTextBox());
+                powerTextField.setText(Integer.toString(creature.getPower()));
+                toughnessTextField.setText(Integer.toString(creature.getToughness()));
+            }
+        }
+        List<Planeswalker> madePlaneswalkers = planeswalkersArrayList;
+        for (Planeswalker planeswalker:madePlaneswalkers) {
+            if (planeswalker.getName().equals(targetCard)){
+                cardNameLabel.setText(planeswalker.getName());
+                manaCostLabel.setText(Integer.toString(planeswalker.getManaCost()));
+                imageView.setImage(planeswalker.getCardImage());
+                typeLineLabel.setText(planeswalker.getTypeLine());
+                textBoxField.setText(planeswalker.getTextBox());
+                powerTextField.setText(Integer.toString(planeswalker.getLoyalty()));
             }
         }
     }
@@ -69,6 +102,17 @@ public class CreatedCardsViewController implements Initializable {
         for (Card card: madeCards) {
             text = text + card.getName() + "\n";
         }
+
+        List<Creature> madeCreatures = creaturesArrayList;
+        for (Creature creature: madeCreatures) {
+            text = text + creature.getName() + "\n";
+        }
+
+        List<Planeswalker> madePlaneswalkers = planeswalkersArrayList;
+        for (Planeswalker planeswalker:madePlaneswalkers){
+            text = text + planeswalker.getName() + "\n";
+        }
+
         listOfCards.setText(text);
     }
 }

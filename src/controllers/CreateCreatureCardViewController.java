@@ -7,13 +7,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import models.Card;
 import models.Creature;
 
+import java.io.File;
 import java.io.IOException;
 
 public class CreateCreatureCardViewController {
+
+    FileChooser fc = new FileChooser();
 
     @FXML
     private TextField cardNameTextField;
@@ -54,7 +59,7 @@ public class CreateCreatureCardViewController {
                 Creature newCreatureCard = new Creature(cardNameTextField.getText(), Integer.parseInt(manaCostTextField.getText()),
                         typeLineTextField.getText(), textBoxField.getText(), imageView.getImage(), Integer.parseInt(powerTextField.getText()),
                         Integer.parseInt(toughnessTextField.getText()));
-                CreatedCardsViewController.cardsArrayList.add(newCreatureCard);
+                CreatedCardsViewController.creaturesArrayList.add(newCreatureCard);
             }catch(IllegalArgumentException e){
                 msgLabel.setText(e.getMessage());
             }
@@ -93,6 +98,12 @@ public class CreateCreatureCardViewController {
         if (textBoxField.getText().isEmpty())
             errMsg += "text box, ";
 
+        if (powerTextField.getText().isEmpty())
+            errMsg += "power, ";
+
+        if (toughnessTextField.getText().isEmpty())
+            errMsg += "toughness, ";
+
         if (errMsg.equals("The following fields are empty: "))
             return true;
 
@@ -101,8 +112,17 @@ public class CreateCreatureCardViewController {
         return false;
     }
 
+    /**
+     * Allows user to upload an image, see it
+     * and is saved as part of the Card object
+     * @param event
+     */
     @FXML
     void uploadImageButton(ActionEvent event) {
-
+        fc = new FileChooser();
+        File tmp = fc.showOpenDialog(uploadButton.getScene().getWindow());
+        System.out.println(tmp.toURI().toString());
+        Image img = new Image(tmp.toURI().toString());
+        imageView.setImage(img);
     }
 }

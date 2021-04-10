@@ -45,7 +45,7 @@
                         <Button mnemonicParsing="false" onAction="#createCreatureCard" text="Submit" />
                      </children>
                   </HBox>
-                  <Label fx:id="msgLabel" prefHeight="72.0" prefWidth="235.0" />
+                  <Label fx:id="msgLabel" prefHeight="72.0" prefWidth="235.0" wrapText="true" />
                   <Button fx:id="uploadButton" mnemonicParsing="false" onAction="#uploadImageButton" text="Upload Image" />
                </children>
             </VBox>
